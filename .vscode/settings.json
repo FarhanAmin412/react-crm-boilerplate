@@ -1,0 +1,13 @@
+{
+  "material-icon-theme.folders.associations": {
+    "redux": "Redux-store",
+    "reducers": "Redux-reducer",
+    "dataSet": "Json",
+    "ui": "animation",
+    "form": "Mjml",
+    "actions": "Redux-actions"
+  },
+  "material-icon-theme.files.associations": {
+    "store.ts": "Redux-store"
+  }
+}
