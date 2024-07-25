@@ -16,10 +16,22 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const GraphLazyImport = createFileRoute('/graph')()
+const CalenderLazyImport = createFileRoute('/calender')()
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const GraphLazyRoute = GraphLazyImport.update({
+  path: '/graph',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/graph.lazy').then((d) => d.Route))
+
+const CalenderLazyRoute = CalenderLazyImport.update({
+  path: '/calender',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/calender.lazy').then((d) => d.Route))
 
 const AboutLazyRoute = AboutLazyImport.update({
   path: '/about',
@@ -49,6 +61,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutLazyImport
       parentRoute: typeof rootRoute
     }
+    '/calender': {
+      id: '/calender'
+      path: '/calender'
+      fullPath: '/calender'
+      preLoaderRoute: typeof CalenderLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/graph': {
+      id: '/graph'
+      path: '/graph'
+      fullPath: '/graph'
+      preLoaderRoute: typeof GraphLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -57,6 +83,8 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
   AboutLazyRoute,
+  CalenderLazyRoute,
+  GraphLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -68,7 +96,9 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/about",
+        "/calender",
+        "/graph"
       ]
     },
     "/": {
@@ -76,6 +106,12 @@ export const routeTree = rootRoute.addChildren({
     },
     "/about": {
       "filePath": "about.lazy.tsx"
+    },
+    "/calender": {
+      "filePath": "calender.lazy.tsx"
+    },
+    "/graph": {
+      "filePath": "graph.lazy.tsx"
     }
   }
 }

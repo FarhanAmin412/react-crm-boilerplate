@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.rdp-chevron polygon{
+  fill: #49454f
+}
+
+.rdp-selected .rdp-day_button{
+  @apply bg-[#0027e9] text-white font-normal
+}
+
+.rdp-root .footer-btn{
+  @apply text-blue-800
+}
+
+.rdp-dropdowns .rdp-dropdown{
+  @apply w-20 px-2
+}
+
+.rdp-dropdowns .rdp-dropdown option{
+  @apply text-[#49454f]
+}
